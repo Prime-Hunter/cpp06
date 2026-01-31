@@ -99,10 +99,57 @@ static int isConvertible(std::string litt)
     return (1);
 }
 
+static int isChar(std::string litt)
+{
+    if (litt[1] != 0)
+    {
+        std::cout << "Not num" << std::endl;
+        std::cout << "litt[1]: " << litt[1] << std::endl;
+        return (0);
+    }
+    if (isNum(litt[0]))
+        return (0);
+    return (1);
+}
+
+static std::string reformatLitt(std::string litt)
+{
+    int i = 0;
+    int j = 0;
+    std::string newLitt = new std::string;
+    if (litt[0] == '+' || litt[0] == '-')
+        i = 1;
+    while (litt[i])
+    {
+        if (litt[i] == 'f')
+            break;
+        newLitt[j] = litt[i];
+        i++;
+        j++;
+    }
+    return (newLitt);
+}
+
 void ScalarConverter::convert(std::string litt)
 {
-    if (isConvertible(litt))
-        std::cout << "Convertible" << std::endl;
-    else
+    if (!isConvertible(litt))
+    {
         std::cout << "Non convertible" << std::endl;
+        return ;
+    }
+    else
+    {
+        if (isChar(litt))
+        {
+            std::cout << "char   : " << litt[0] << std::endl;
+            std::cout << "int    : " << static_cast<int>(litt[0]) << std::endl;
+            std::cout << "float  : " << static_cast<float>(litt[0]) << "f" << std::endl;
+            std::cout << "double : " << static_cast<double>(litt[0]) << std::endl;
+        }
+        else
+        {
+            double subNum;
+            std::string subLitt = reformatLitt(litt);
+        }
+    }
 }
