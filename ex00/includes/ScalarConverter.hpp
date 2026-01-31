@@ -5,9 +5,9 @@ class ScalarConverter
 {
     public:
         ScalarConverter();
-        ~ScalarConnverter();
+        virtual ~ScalarConverter();
         ScalarConverter(const ScalarConverter &copy);
         ScalarConverter &operator =(const ScalarConverter &src);
 
-        static void convert(std::string obj);
-}
+        static void convert(std::string litt);
+};
