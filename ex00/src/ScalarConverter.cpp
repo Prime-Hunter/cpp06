@@ -57,38 +57,30 @@ static int isConvertible(std::string litt)
                 }
                 else
                 {
-                    std::cout << "---TC1---" << i << std::endl;
-                    std::cout << "- i: " << i << std::endl;
-                    std::cout << "- sign: " << sign << std::endl;
-                    std::cout << "- letters: " << letters << std::endl;
-                    std::cout << "- comma: " << comma << std::endl;
                     return (0);
                 }
             }
             else
             {
                 if (!isNum(litt[i]))
-                    letters++;
+                {
+                    if (litt[i] == 'f' && litt[i+1] == 0)
+                        letters = letters+0;
+                    else
+                        letters++;
+                }
                 if (sign + letters > 1)
                 {
-                    std::cout << "---TC2---" << i << std::endl;
-                    std::cout << "- i: " << i << std::endl;
-                    std::cout << "- sign: " << sign << std::endl;
-                    std::cout << "- letters: " << letters << std::endl;
-                    std::cout << "- comma: " << comma << std::endl;
                     return (0);
                 }
                 if (litt[i] == '.')
                 {
+                    if (litt[i+1] == 0 || !isNum(litt[i+1]))
+                        return (0);
                     if (!comma)
                         comma++;
                     else
                     {
-                        std::cout << "---TC3---" << i << std::endl;
-                        std::cout << "- i: " << i << std::endl;
-                        std::cout << "- sign: " << sign << std::endl;
-                        std::cout << "- letters: " << letters << std::endl;
-                        std::cout << "- comma: " << comma << std::endl;
                         return (0);
                     }
                 }
@@ -96,10 +88,10 @@ static int isConvertible(std::string litt)
         }
         else
         {
-            std::cout << "- i: " << i << std::endl;
-            std::cout << "- sign: " << sign << std::endl;
-            std::cout << "- letters: " << letters << std::endl;
-            std::cout << "- comma: " << comma << std::endl;
+            //std::cout << "- i: " << i << std::endl;
+            //std::cout << "- sign: " << sign << std::endl;
+            //std::cout << "- letters: " << letters << std::endl;
+            //std::cout << "- comma: " << comma << std::endl;
             return (0);
         }
         i++;
