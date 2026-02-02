@@ -153,7 +153,7 @@ void ScalarConverter::convert(std::string litt)
         else
         {
             double subNum = reformatLitt(litt);
-            if (isPrintable(subNum))
+            if (31 < subNum && subNum < 127)
                 std::cout << "char   : " << static_cast<char>(subNum) << std::endl;
             else
                 std::cout << "char   : could not convert;" << std::endl;
