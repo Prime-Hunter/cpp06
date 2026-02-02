@@ -103,8 +103,6 @@ static int isChar(std::string litt)
 {
     if (litt[1] != 0)
     {
-        std::cout << "Not num" << std::endl;
-        std::cout << "litt[1]: " << litt[1] << std::endl;
         return (0);
     }
     if (isNum(litt[0]))
@@ -112,23 +110,25 @@ static int isChar(std::string litt)
     return (1);
 }
 
-static std::string reformatLitt(std::string litt)
+static std::string *reformatLitt(std::string litt)
 {
     int i = 0;
     int j = 0;
-    std::string newLitt = new std::string;
+    std::string *newLitt = new std::string;
     if (litt[0] == '+' || litt[0] == '-')
         i = 1;
-    while (litt[i])
+    while (litt[i] != 0)
     {
         if (litt[i] == 'f')
             break;
-        newLitt[j] = litt[i];
+        newLitt[j] = &litt[i];
         i++;
         j++;
     }
     return (newLitt);
 }
+
+void 
 
 void ScalarConverter::convert(std::string litt)
 {
@@ -148,8 +148,11 @@ void ScalarConverter::convert(std::string litt)
         }
         else
         {
+            std::string *subLitt = reformatLitt(litt);
+            std::stringstream ss(*subLitt);
             double subNum;
-            std::string subLitt = reformatLitt(litt);
+            ss >> subNum;
+            std::cout << "converted double: " << subNum << std::endl;
         }
     }
 }
