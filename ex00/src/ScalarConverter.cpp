@@ -88,10 +88,6 @@ static int isConvertible(std::string litt)
         }
         else
         {
-            //std::cout << "- i: " << i << std::endl;
-            //std::cout << "- sign: " << sign << std::endl;
-            //std::cout << "- letters: " << letters << std::endl;
-            //std::cout << "- comma: " << comma << std::endl;
             return (0);
         }
         i++;
@@ -110,13 +106,18 @@ static int isChar(std::string litt)
     return (1);
 }
 
-static std::string *reformatLitt(std::string litt)
+static double reformatLitt(std::string litt)
 {
     int i = 0;
     int j = 0;
+    int sign = 0;
     std::string *newLitt = new std::string;
     if (litt[0] == '+' || litt[0] == '-')
+    {
+        if (litt[0] == '-')
+            sign++;
         i = 1;
+    }
     while (litt[i] != 0)
     {
         if (litt[i] == 'f')
@@ -125,10 +126,13 @@ static std::string *reformatLitt(std::string litt)
         i++;
         j++;
     }
-    return (newLitt);
+    std::stringstream ss(*newLitt);
+    double subNum;
+    ss >> subNum;
+    if (sign)
+        subNum *= -1;
+    return (subNum);
 }
-
-void 
 
 void ScalarConverter::convert(std::string litt)
 {
@@ -148,11 +152,14 @@ void ScalarConverter::convert(std::string litt)
         }
         else
         {
-            std::string *subLitt = reformatLitt(litt);
-            std::stringstream ss(*subLitt);
-            double subNum;
-            ss >> subNum;
-            std::cout << "converted double: " << subNum << std::endl;
+            double subNum = reformatLitt(litt);
+            if (isPrintable(subNum))
+                std::cout << "char   : " << static_cast<char>(subNum) << std::endl;
+            else
+                std::cout << "char   : could not convert;" << std::endl;
+            std::cout << "int    : " << static_cast<int>(subNum) << std::endl;
+            std::cout << "float  : " << static_cast<float>(subNum) << "f" << std::endl;
+            std::cout << "double : " << subNum << std::endl;
         }
     }
 }
