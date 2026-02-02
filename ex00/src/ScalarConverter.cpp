@@ -66,23 +66,23 @@ static int isConvertible(std::string litt)
                 {
                     if (litt[i] == 'f' && litt[i+1] == 0)
                         letters = letters+0;
+                    else if (litt[i] == '.')
+                    {
+                        if (litt[i+1] == 0 || !isNum(litt[i+1]))
+                            return (0);
+                        if (!comma)
+                            comma++;
+                        else
+                        {
+                            return (0);
+                        }
+                    }
                     else
-                        letters++;
+                        return (0);
                 }
                 if (sign + letters > 1)
                 {
                     return (0);
-                }
-                if (litt[i] == '.')
-                {
-                    if (litt[i+1] == 0 || !isNum(litt[i+1]))
-                        return (0);
-                    if (!comma)
-                        comma++;
-                    else
-                    {
-                        return (0);
-                    }
                 }
             }
         }
